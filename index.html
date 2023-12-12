@@ -3,11 +3,12 @@
     <body>
 
         <script>
+            const _data = [];
             fetch('data.json')
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    const data = data;
+                    const _data = data;
                 })
                 .catch(error => console.error('Error:', error));
         </script>
