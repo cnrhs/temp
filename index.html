@@ -1,61 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Interactive Scatter Plot</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div>
-        <label for="dataset-select">Choose a Dataset:</label>
-        <select id="dataset-select">
-            <option value="dataset1">Dataset 1</option>
-            <option value="dataset2">Dataset 2</option>
-            <!-- Add more datasets as options -->
-        </select>
-    </div>
-    <canvas id="scatterPlot"></canvas>
+    <body>
 
-    <script>
-        // Prepare datasets
-        const datasets = {
-            dataset1: [{x: 10, y: 20}, {x: 15, y: 10}, {x: 5, y: 25}],
-            dataset2: [{x: 5, y: 15}, {x: 20, y: 25}, {x: 15, y: 5}],
-            // Add more datasets as needed
-        };
-
-        // Function to create a chart
-        let myChart;
-        function createChart(data) {
-            const ctx = document.getElementById('scatterPlot').getContext('2d');
-            if (myChart) {
-                myChart.destroy();
-            }
-            myChart = new Chart(ctx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Scatter Dataset',
-                        data: data,
-                        backgroundColor: 'rgba(0, 123, 255, 0.5)'
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {beginAtZero: true},
-                        y: {beginAtZero: true}
-                    }
-                }
-            });
-        }
-
-        // Event listener for dropdown change
-        document.getElementById('dataset-select').addEventListener('change', function() {
-            const selectedDataset = datasets[this.value];
-            createChart(selectedDataset);
-        });
-
-        // Initialize the chart with default dataset
-        createChart(datasets['dataset1']);
-    </script>
-</body>
+        <script>
+            fetch('data.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const data = data;
+                })
+                .catch(error => console.error('Error:', error));
+        </script>
+        
+    </body>
 </html>
