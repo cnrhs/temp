@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>My Projects</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: white;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: lightgrey;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .main-content {
+            padding-top: 40px; /* Space for fixed navbar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-    <div class="centered">
-        Hello.
-    </div>
+
+<div class="navbar">
+    <a href="#about">About</a>
+    <a href="#home">Home</a>
+    <a href="#projects">Projects</a>
+</div>
+
+<div class="main-content">
+    Hello.
+</div>
+
 </body>
 </html>
