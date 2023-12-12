@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Projects</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'JetBrains Mono', monospace;
-            background-color: white;
-        }
-
-        .navbar {
-            overflow: hidden;
-            background-color: lightgrey;
-            position: fixed;
-            top: 0;
-            width: 100%;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: black;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .main-content {
-            /*padding-top: 40px; /* Space for fixed navbar */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-    </style>
+    <title>Interactive Scatter Plot</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div>
+        <label for="dataset-select">Choose a Dataset:</label>
+        <select id="dataset-select">
+            <option value="dataset1">Dataset 1</option>
+            <option value="dataset2">Dataset 2</option>
+            <!-- Add more datasets as options -->
+        </select>
+    </div>
+    <canvas id="scatterPlot"></canvas>
 
-<div class="navbar">
-    <a href="#about">About</a>
-    <a href="#home">Home</a>
-    <a href="#projects">Projects</a>
-</div>
+    <script>
+        // Prepare datasets
+        const datasets = {
+            dataset1: [{x: 10, y: 20}, {x: 15, y: 10}, {x: 5, y: 25}],
+            dataset2: [{x: 5, y: 15}, {x: 20, y: 25}, {x: 15, y: 5}],
+            // Add more datasets as needed
+        };
 
-<div class="main-content">
-    Hello.
-</div>
+        // Function to create a chart
+        let myChart;
+        function createChart(data) {
+            const ctx = document.getElementById('scatterPlot').getContext('2d');
+            if (myChart) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Scatter Dataset',
+                        data: data,
+                        backgroundColor: 'rgba(0, 123, 255, 0.5)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {beginAtZero: true},
+                        y: {beginAtZero: true}
+                    }
+                }
+            });
+        }
 
+        // Event listener for dropdown change
+        document.getElementById('dataset-select').addEventListener('change', function() {
+            const selectedDataset = datasets[this.value];
+            createChart(selectedDataset);
+        });
+
+        // Initialize the chart with default dataset
+        createChart(datasets['dataset1']);
+    </script>
 </body>
 </html>
